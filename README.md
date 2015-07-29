@@ -17,7 +17,9 @@ dom选择器只暴露一个d的全局变量, 可自行设置.
 空格		//内部所有元素, 如 d('body div'), 选择body中所有div
 ,			//并列关系, 如 d('#list>li, #box'), 选择#list子元素中li和#box
 
-/* [attr=value] 可以常用于放在#或.或标签名后面过滤, 属性和属性名只能包含字母,数字, _和-   */
+/* [attr=value] 可以常用于放在#或.或标签名后面过滤, 属性和属性名只能包含字母,数字, _和-   
+*  此过滤字符只兼容到IE8
+*/
 [attr=value]	//过滤属性attr的值是value的所有元素. 可用与过滤
 [attr!=value]   //过滤属性attr不是value的所有元素, 没有attr属性的不会被选择
 [attr^=value]   //过滤属性attr以value开头的所有元素
