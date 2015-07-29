@@ -2,9 +2,13 @@
 =====
 ###介绍
 dom选择器是一个超轻量级纯选择器, 兼容到IE5, 用法和document.querySelectorAll几乎一样.
-如果浏览器支持document.querySelectorAll方法且查询语句正确, 则此选择器会优先使用此方法.
-dom选择器只暴露一个d的全局变量, 可自行设置. 
-比如设置为abc,则在自执行函数底部修改为:```window.abc = d; delete window.d;```
+* 此dom选择器超轻量, 未压缩100+行, 压缩之后3KB
+* 如果浏览器支持document.querySelectorAll方法且查询语句正确, 则此选择器会优先使用此方法.
+* dom选择器只暴露一个d的全局变量, 可自行设置.
+* 调用d函数, 任何时候均返回一个真数组.
+
+比如设置为abc,可以在js代码最上面加上:```window.abc = d; delete window.d;```
+
 ###引入
 直接script标签引用即可, ```<script src='dom.min.js'></script>```
 
@@ -60,7 +64,7 @@ dom选择器只暴露一个d的全局变量, 可自行设置.
 #####再次强调: 执行d函数, 任何情况下均返回一个数组. 要想得到单个元素使用 d('#list')[0].
 
 ###例子
-```
+```javascript
 d('#main>ul li:eq(3) input:button')
 d('ul:first li.item , body, #footer')
 d('ul:even>li a[src$=.jpg]:last')

@@ -4,22 +4,24 @@
 	<meta charset="UTF-8">
 	<title>Document</title>
 	<script src="dom.js"></script>
+	<style>
+		#main{width:500px; margin:0 auto;}
+	</style>
 </head>
-<body>
-	<input type="button" value="show" id="btn">
+<body style="font-family:microsoft yahei; color:#555">
 	<div id="main">
 		<ul class="list">
 			<li>
 				<ul>
-					<li class="item">macbook air 11</li>
-					<li>macbook 12</li>
+					<li class="item"><a href="http://www.123.com">www.123.com</a></li>
+					<li><a href="http://www.abc.org">www.abc.org</a></li>
 				</ul>
 			</li>
 			<li>
 				<ul>
 					<li class="item">macbook pro 13</li>
 					<li>
-						<a href="http://jd.com">jd-macbook pro 15</a>
+						<a href="http://www.jd.com">http://www.jd.com</a>
 					</li>
 				</ul>
 			</li>
@@ -34,7 +36,7 @@
 				<input type="text" disabled>
 			</li>
 			<li>
-				<a href="http://sczql.cn">sczql.cn</a>
+				<a href="http://www.boc.cn">www.boc.cn</a>
 			</li>
 			<li>haha</li>
 		</ul>
@@ -44,14 +46,23 @@
 			<li>333</li>
 		</ul>
 	</div>
+	<div style="background:#eee; width:600px; margin:10px auto; padding:10px; border-radius:10px;">
+		<pre>
+			var item = d('#main li input:disabled, a[href$=.com]');
+			for(var i=0, m=item.length; i&lt;m; i++){
+			  item[i].style.background = '#f70'
+			} 
+		</pre>
+		<div style="text-align:center"><input type="button" value="start" id="btn"></div>
+	</div>
 	<script>
 		var btn = document.getElementById('btn');
 		// var item = d('.list:last li:eq(1), input:text:disabled, a[href$=.cn]');
-		var item = d('.list:child(2)');
+		var item = d('#main li input:disabled, a[href$=.com]');
 
 		btn.onclick = function(){
 			// console.log(item)
-			for(var i=0, m=item.length; i<m; i++) item[i].style.background = '#f70'
+			for(var i=0, m=item.length; i<m; i++) item[i].style.background = '#f70';
 		}
 
 	</script>

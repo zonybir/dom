@@ -131,10 +131,10 @@
 	function get(obj, attr){
 		return obj.getAttribute(attr) || '';
 	}
-	function trim(str, s, ignore){
-		var re = new RegExp('^'+s+'+|'+s+'+$', 'g' + (ignore||'i'));
-		return str.replace(re, '');
-	}
+	// function trim(str, s, ignore){
+	// 	var re = new RegExp('^'+s+'+|'+s+'+$', 'g' + (ignore||'i'));
+	// 	return str.replace(re, '');
+	// }
 	function filter(arr, fn){
 		for(var i=0, m=arr.length, res=[]; i<m; i++) if(fn.call(arr[i], i, arr[i])) res.push(arr[i]);
 		return res;
