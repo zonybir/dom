@@ -1,4 +1,4 @@
-超轻量且兼容到IE6的dom选择器
+超轻量且兼容到IE5的dom选择器
 =====
 ###介绍
 dom选择器是一个超轻量级纯选择器, 兼容到IE5, 用法和document.querySelectorAll几乎一样.
