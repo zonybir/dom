@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="dom.js"></script>
+	<style>
+		body, ul{margin:0px; padding:0px; list-style:none; }
+		#main{ width:1000px; height: ; background:#eee; margin:10px auto; }
+		#main>li{width:100%; height:40px; background:+#f70; line-height:40px; padding-top:10px; padding-bottom:10px;}
+		.code, .res{ width:500px; height:40px; font-family:arial,verdana, microsoft yahei; float:left; text-align:center; }
+		.code{ color:#666; }
+		.res{ width:450px; float:right; border:1px solid #f70; position:relative; }
+		.box{width:30px; height:30px; background:#f70; position:absolute; left:100px; top:5px}
+		.box2{width:30px; height:30px; background:#f70; float:left; margin:5px 5px;}
+		input{text-align:center;}
+		.bye{color:#fff;}
+	</style>
+</head>
+<body>
+	<ul id="main">
+		<h1>fdsafdsaga</h1>
+		<h3>TYUoplnioknnp</h3>
+		<li t='bbb.png'>
+			<div class="code">s("#t1").html("hello javascript!");</div>
+			<input type="button" value="=>" id='btn1'>
+			<div class="res" id="t1">#t1</div>
+		</li>
+		<li t='bbb.png'>
+			<div class="code">s("#t2").attr({"disabled": false}).val("hello javascript!");</div>
+			<input type="button" value="=>" id='btn2'>
+			<div class="res">
+				<input type="text" id="t2" disabled value="#t2 is disabled">
+			</div>
+		</li>
+		<li t='aaa.jpg'>
+			<div class="code">s("#t3").css({"left":"300px", "background":"#6cf"});</div>
+			<input type="button" value="=>" id='btn3'>
+			<div class="res">
+				<div id="t3" class="box"></div>
+			</div>
+		</li>
+		<li t='bbb.png'>
+			<div class="code" style="font-size:12px">s("#t4").animate({ left:"500px"}).animate({left:"100px"}, 500, function(){ alert("动画结束!"); });</div>
+			<input type="button" value="=>" id='btn4'>
+			<div class="res">
+				<div id="t4" class="box">#t4</div>
+			</div>
+		</li>
+		<li t='bbb.png'>
+			<div class="code">s("#t5").append("&lt;div class='box2'>&lt;/div&gt;");</div>
+			<input type="button" value="=>" id='btn5'>
+			<div class="res"  id="t5">
+				<div class="box2"></div>
+			</div>
+		</li>
+		<li>
+			<div class="code">s("#t6").siblings(".bye").remove();</div>
+			<input type="button" value="=>" id='btn6'>
+			<div class="res">
+				<div class="box2 bye">bye</div>
+				<div class="box2 bye">bye</div>
+				<div class="box2">stay</div>
+				<div class="box2">stay</div>
+				<div class="box2" id="t6">#t6</div>
+				<div class="box2 bye" >bye</div>
+				<div class="box2">stay</div>
+				<div class="box2">stay</div>
+			</div>
+		</li>
+		<li>
+			<div class="code">s("#t7>a").css({"color":"#5a0"}).eq(2).css({"fontSize":"36px"});</div>
+			<input type="button" value="=>" id='btn7'>
+			<div class="res" id="t7">
+				<a href="a.php">a.php</a>
+				<a href="b.php">b.php</a>
+				<a href="c.php">c.php</a>
+				<a href="d.php">d.php</a>
+				<div class="box2"><a href="e.php">e</a></div>
+				<div class="box2"><a href="f.php">f</a></div>
+			</div>
+		</li>	
+	</ul>
+	<script>
+		// s('#main li').each(function(i, e){
+		// 	e.style.background = i % 2 === 0 ? "#deddff" : "#ffd5cf";
+		// })
+		// s("#btn1").on("click", function(){
+		// 	s("#t1").html("hello javascript!");
+		// });
+		// s("#btn2").on("click", function(){
+		// 	s("#t2").attr({"disabled": false}).val("hello javascript!");
+		// });
+		// s("#btn3").on("click", function(){
+		// 	s("#t3").css({"left":"300px", "background":"#6cf"});
+		// });
+
+		// var st4 = s("#t4");
+		// s("#btn4").on("click", function(){
+		// 	st4.animate({ left:"400px"}, 500).animate({left:"100px"}, 500, function(){ alert("动画结束!"); });
+		// });
+
+		// s("#btn5").on("click", function(){
+		// 	s("#t5").append("<div class='box2'></div>");
+		// });
+		// s("#btn6").on("click", function(){
+		// 	s("#t6").siblings(".bye").remove();
+		// });
+		// s("#btn7").on("click", function(){
+		// 	s("#t7>a").css({"color":"#5a0"}).eq(2).css({"fontSize":"36px"});
+		// });		
+		
+	</script>
+</body>
+</html>
