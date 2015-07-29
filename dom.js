@@ -77,7 +77,7 @@
 					if(!str) return cop=[];
 					if( str[2] === '!' ) cop = filter(cop.length ? cop : tag('*'), function(i, e){ return getAttr(e, str[1]) !== str[3]; });
 					else if( str[2] === '^' ){
-						cop = filter(cop.length ? cop : tag('*'), function(i, e){ return (getAttr(e, str[1])+'').indexOf(str[3])===0; })
+						cop = filter(cop.length ? cop : tag('*'), function(i, e){ return String((e.getAttribute(str[1])+'')).indexOf(str[3])===0; })
 					}
 					else if( str[2] === '$' ){
 						cop = filter(cop.length ? cop : tag('*'), function(i, e){
@@ -103,9 +103,6 @@
 	function hasCls(obj, cls){
 		var temp = obj.className.split(/\s+/);
 		for(var i=0, m=temp.length; i<m; i++) if(temp[i] === cls) return true;
-	}
-	function getAttr(obj, attr){
-		return obj.getAttribute(attr);
 	}
 	function each(arr, fn){
 		for(var i=0, m=arr.length; i<m; i++) fn.call(arr[i], i, arr[i]);
