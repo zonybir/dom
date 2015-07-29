@@ -1,3 +1,6 @@
+/* dom.js
+ * @author:flfwzgl https://github.com/flfwzgl
+ * @copyright: MIT license */
 (function(window){
 	var doc = window.document;
 
