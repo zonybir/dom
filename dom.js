@@ -4,25 +4,20 @@
 (function(window){
 	var doc = window.document;
 
-	var ua = window.navigator.userAgent,
-		oldIe = /msie [5678]/gi.test(ua);
-
 	function dom(sel){
 		if(typeof sel !== 'string') return;
-		if(!oldIe){
-			return unique(document.querySelectorAll(sel));
-		}
-		else{
+		try{ return unique(document.querySelectorAll(sel)); }
+		catch(e){
 			//将" #nav  > ul.item ,#form   input[value=abc]" 变成 "#nav>ul.item,#form input[value=abc]", 并用","断开
 			sel = sel.replace(/^\s+|\s+$/g, '').replace(/\s{2,}/g, ' ').replace(/\s*([:\,>])\s*/g, '$1').split(',');
 			var res = [], cop = [];
 			each(sel, function(i, e){
 				if(e === '*') return unique(tag('*'));
 				e = e.match( /\[[a-z][a-z0-9_\-]*?[!\^\$]?=.+?\]|\s?#?[a-z][a-z0-9_\-]*|\.[a-z][a-z0-9_\-]*|>|\*|\s|:[a-z][a-z0-9_\-\(\)]+/gi );
-				// console.log(e)
 				each(e, function(i, e){ detect(e); });
+
 				res = concat(res, cop);
-				cop.length = 0;
+				cop = [];	//低版本ie不兼容cop.length = 0;
 			});
 			return unique(res);
 		}
@@ -71,22 +66,45 @@
 					else if( str === ':checked' ) cop = filter(cop, function(i, e){ return e.nodeName==='INPUT' && e.checked; });
 					else if( str === ':enabled' ) cop = filter(cop, function(i, e){ return e.nodeName==='INPUT' && !e.disabled; });
 					else if( str === ':disabled' ) cop = filter(cop, function(i, e){ return e.nodeName==='INPUT' && e.disabled; });
+					
+					//以下非过滤, 会删掉原有cop中的元素
+					else if( str === ':parent' ) cop = each(cop, function(i, e){ temp.push(e.parentNode); });
+					else if( str === ':child' ){
+						temp = [];
+						each(cop, function(i, e){ temp.push( filter( e.childNodes, function(i, e){ return e.nodeType === 1; }) ); });
+						cop = concat.apply(null, temp);
+					}
+					else if( str === ':firstChild' ){
+						temp = [];
+						each(cop, function(i, e){ temp.push( e.firstChild.nodeType === 1 ? e.firstChild : e.childNodes[1] ); });
+						cop = temp;			
+					}
+					else if( str === ':lastChild' ){
+						temp = [];
+						each(cop, function(i, e){ temp.push( e.lastChild.nodeType === 1 ? e.lastChild : e.childNodes[e.childNodes.length - 2] ); });
+						cop = temp;	
+					}
+					else if( str.indexOf(':child(') === 0 ){
+						temp = [];
+						each(cop, function(i, e){ temp.push( filter( e.childNodes, function(i, e){ return e.nodeType === 1; })[str.substring(7, str.length-1)] ); });
+						cop = temp;
+					}
 				}
 				else if( str.charAt(0) === '[' && str.charAt(str.length - 1) === ']' ){
 					str = /^\[([a-z][a-z0-9_\-]*?)([!\^\$]?)=(.+?)\]$/g.exec(str);
 					if(!str) return cop=[];
-					if( str[2] === '!' ) cop = filter(cop.length ? cop : tag('*'), function(i, e){ return getAttr(e, str[1]) !== str[3]; });
+					if( str[2] === '!' ) cop = filter(cop.length ? cop : tag('*'), function(i, e){ return get(e, str[1]) && get(e, str[1]) !== str[3]; });
 					else if( str[2] === '^' ){
-						cop = filter(cop.length ? cop : tag('*'), function(i, e){ return String((e.getAttribute(str[1])+'')).indexOf(str[3])===0; })
+						cop = filter(cop.length ? cop : tag('*'), function(i, e){ return get(e, str[1]).indexOf(str[3])===0; })
 					}
 					else if( str[2] === '$' ){
 						cop = filter(cop.length ? cop : tag('*'), function(i, e){
-							var attr = getAttr(e, str[1])+'';
+							var attr = get(e, str[1]);
 							return attr.indexOf(str[3]) + str[3].length === attr.length; 
 						});
 					}
 					else if( str[2] === '' ){
-						cop = filter(cop.length ? cop : tag('*'), function(i, e){ return getAttr(e, str[1]) === str[3]; });
+						cop = filter(cop.length ? cop : tag('*'), function(i, e){ return get(e, str[1]) === str[3]; });
 					}
 				}
 			}
@@ -110,6 +128,9 @@
 	function inArr(e, arr){
 		for(var i=0, m=arr.length; i<m; i++) if(e === arr[i]) return true;
 	}
+	function get(obj, attr){
+		return obj.getAttribute(attr) || '';
+	}
 	function trim(str, s, ignore){
 		var re = new RegExp('^'+s+'+|'+s+'+$', 'g' + (ignore||'i'));
 		return str.replace(re, '');
@@ -120,7 +141,7 @@
 	}
 	function unique(arr){
 		if(arr.length === 0) return arr;
-		for(var i=0, m=arr.length, res=[]; i<m; i++) if(!exist(arr[i], res) && arr[i] !== null) res.push(arr[i]);
+		for(var i=0, m=arr.length, res=[]; i<m; i++) if(!exist(arr[i], res) && arr[i] !== null && arr[i] !== undefined) res.push(arr[i]);
 		return res;
 		function exist(e, arr){
 			for(var i=0, m=arr.length; i<m; i++) if(e === arr[i]) return true;

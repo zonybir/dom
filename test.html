@@ -3,60 +3,57 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
-	<script src="dom.min.js"></script>
+	<script src="dom.js"></script>
 </head>
 <body>
+	<input type="button" value="show" id="btn">
 	<div id="main">
-		<div class="wraper">
-			<ul class="list">
-				<li>
-					<ul class='left_ul'>
-						<li>
-							<input type="button" value="start">
-						</li>
-						<li>
-							<input type="text" value="hello">
-						</li>
-					</ul>
-				</li>
-				<li>
-					<ul class='left_ul'>
-						<li>
-							<input type="text" value="js" disabled>
-							<input type="reset" value="js" disabled>
-						</li>
-						<li>
-							<i><span>icon</span></i>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<ul class='left_ul'>
-						<li><a href="http://jd.com">jd.com</a></li>
-						<li><a href="http://tmall.com">tmall.com</a></li>
-					</ul>
-				</li>
-				<li>
-					<ul>
-						<li><a href="http://jd.com">jd.com</a></li>
-						<li><a href="http://tmall.com">tmall.com</a></li>
-					</ul>
-				</li>
-			</ul>
-		</div>
-		<div class="wraper">
-			<input type="button" value="abc" class='btn'>
-		</div>
-		<div class="wraper">
-			<ul>
-				<li class='item'><img src="sichuan.jpg" alt=""></li>
-				<li><img src="guonei.jpg" alt=""></li>
-				<li><img src="chujing.jpg" alt=""></li>
-				<li><img src="chujing.png" alt=""></li>
-				<li><img src="chujing.gif" alt=""></li>
-				<li><img src="chujing.png" alt=""></li>
-			</ul>
-		</div>
+		<ul class="list">
+			<li>
+				<ul>
+					<li class="item">macbook air 11</li>
+					<li>macbook 12</li>
+				</ul>
+			</li>
+			<li>
+				<ul>
+					<li class="item">macbook pro 13</li>
+					<li>
+						<a href="http://jd.com">jd-macbook pro 15</a>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<input type="button" value="start">
+				<input type="button" value="stop" disabled>
+			</li>
+		</ul>
+		<ul class="list">
+			<li>
+				<input type="text">
+				<input type="text" disabled>
+			</li>
+			<li>
+				<a href="http://sczql.cn">sczql.cn</a>
+			</li>
+			<li>haha</li>
+		</ul>
+		<ul class="list">
+			<li>111</li>
+			<li>222</li>
+			<li>333</li>
+		</ul>
 	</div>
+	<script>
+		var btn = document.getElementById('btn');
+		// var item = d('.list:last li:eq(1), input:text:disabled, a[href$=.cn]');
+		var item = d('.list:child(2)');
+
+		btn.onclick = function(){
+			// console.log(item)
+			for(var i=0, m=item.length; i<m; i++) item[i].style.background = '#f70'
+		}
+
+	</script>
 </body>
 </html>
