@@ -13,13 +13,13 @@ eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
 	</style>
 </head>
 <body style="font-family:microsoft yahei; color:#555">
-	<h2 style="text-align:center;">一个超轻量且兼容到IE5的dom选择器</h2>
+	<h2 style="text-align:center;">一个超轻量且兼容到 <i style="color:#c00">IE5</i> 的dom选择器</h2>
 	<div id="main">
 		<ul class="list">
 			<li>
 				<ul>
-					<li><a href="https://www.baidu.com">https://www.baidu.com</a></li>
 					<li><a href="http://www.abc.org">http://www.abc.org</a></li>
+					<li><a href="https://www.baidu.com">https://www.baidu.com</a></li>
 					<li><a href="http://www.hhh.com">http://www.hhh.com</a></li>
 				</ul>
 			</li>
@@ -55,7 +55,7 @@ eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
 	</div>
 	<div style="background:#eee; width:1000px; margin:10px auto; padding:10px; border-radius:10px;">
 		<pre>
-			var item = d('#main li input:disabled, a[href^=https][href$=.com], .list:last&gt;li:gt(2)');
+			var item = d('#main li input:disabled, a[href^=https][href$=.com], .list:last&gt;li:even');
 
 			for(var i=0, m=item.length; i&lt;m; i++){
 			  item[i].style.background = '#f70';
@@ -69,7 +69,7 @@ eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
 	<script>
 		var btn = document.getElementById('btn');
 		// var item = d('.list:last li:eq(1), input:text:disabled, a[href$=.cn]');
-		var item = d('#main li input:disabled, a[href^=https][href$=.com], .list:last>li:gt(2)');
+		var item = d('#main li input:disabled, a[href^=https][href$=.com], .list:last>li:even');
 
 		btn.onclick = function(){
 			// console.log(item)
