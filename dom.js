@@ -1,5 +1,5 @@
-/* dom.js
- * @author:flfwzgl https://github.com/flfwzgl
+/* dom.js v0.1.0
+ * @author:flfwzgl https://github.com/flfwzgl/dom
  * @copyright: MIT license */
 (function(window){
 	var doc = window.document;
