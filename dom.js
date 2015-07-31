@@ -111,7 +111,6 @@
 			
 		}
 	}
-
 	function id(id, obj){
 		return (obj||doc).getElementById(id);
 	}
