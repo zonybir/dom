@@ -24,8 +24,7 @@
 
     function detect(str){
       var temp;
-      if(str === '*') {}
-      else if( str.charAt(0) === ' ' ){
+      if( str.charAt(0) === ' ' ){
         //" #item"和" li"和" "的特殊情况
         if( str.charAt(1) === '#' ) cop = [id(str.substring(1))];
         else{
@@ -40,7 +39,7 @@
         cop = concat.apply(null, temp);
       }
       else{
-        //仅过滤, 若cop为空, 根据情况判断
+        //过滤分支, 若cop为空, 根据情况判断
         if( str.charAt(0) === '#' ) cop = [id(str.substring(1))];
         else if( str.charAt(0) === '.' ){
           cop = filter(cop.length ? cop : tag('*'), function(i, e){ return hasCls(e, str.substring(1)); });
@@ -49,7 +48,8 @@
           cop = cop.length ? filter(cop, function(i, e){ return e.nodeName === str.toUpperCase(); }) : tag(str);
         }
         else if( str.charAt(0) === ':' ){
-          cop.length || (cop = tag('*'));
+          //以下是过滤, 无需temp
+          if( !cop.length ) return cop;
           if( str.indexOf(':eq(') > -1 ) cop = [cop[str.substring(4, str.length-1)]];
           else if( str.indexOf(':gt(') > -1 ) cop = filter(cop, function(i, e){ return i > +str.substring(4, str.length-1); });
           else if( str.indexOf(':lt(') > -1 ) cop = filter(cop, function(i, e){ return i < +str.substring(4, str.length-1); });
@@ -67,7 +67,7 @@
           else if( str === ':enabled' ) cop = filter(cop, function(i, e){ return e.nodeName==='INPUT' && !e.disabled; });
           else if( str === ':disabled' ) cop = filter(cop, function(i, e){ return e.nodeName==='INPUT' && e.disabled; });
           
-          //以下非过滤, 会删掉原有cop中的元素
+          //以下是对cop中元素子元素选区, 非过滤, 会覆盖原有cop中的元素, 因此需要temp
           else if( str === ':parent' ){
             temp = [];
             each(cop, function(i, e){ temp.push(e.parentNode); });
@@ -92,11 +92,11 @@
             temp = [];
             each(cop, function(i, e){ temp.push( filter( e.childNodes, function(i, e){ return e.nodeType === 1; })[str.substring(7, str.length-1)] ); });
             cop = temp;
-          }
+          } 
         }
         else if( str.charAt(0) === '[' && str.charAt(str.length - 1) === ']' ){
           str = /^\[([a-z][a-z0-9_\-]*?)([!\^\$]?)=(.+?)\]$/g.exec(str);
-          if(!str) return cop=[];
+          if(!str) return cop;
           if( str[2] === '!' ) cop = filter(cop.length ? cop : tag('*'), function(i, e){ return get(e, str[1]) && get(e, str[1]) !== str[3]; });
           else if( str[2] === '^' ){
             cop = filter(cop.length ? cop : tag('*'), function(i, e){ return get(e, str[1]).indexOf(str[3])===0; })
@@ -134,10 +134,6 @@
   function get(obj, attr){
     return obj.getAttribute(attr) || '';
   }
-  // function trim(str, s, ignore){
-  //  var re = new RegExp('^'+s+'+|'+s+'+$', 'g' + (ignore||'i'));
-  //  return str.replace(re, '');
-  // }
   function filter(arr, fn){
     for(var i=0, m=arr.length, res=[]; i<m; i++) if(fn.call(arr[i], i, arr[i])) res.push(arr[i]);
     return res;
@@ -155,6 +151,5 @@
     for(i=0, m=arg.length; i<m; i++) for(j=0, n=arg[i].length; j<n; j++) res.push(arg[i][j]);
     return res;
   }
-
   window.d = dom;
 })(window);
