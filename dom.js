@@ -68,7 +68,11 @@
           else if( str === ':disabled' ) cop = filter(cop, function(i, e){ return e.nodeName==='INPUT' && e.disabled; });
           
           //以下非过滤, 会删掉原有cop中的元素
-          else if( str === ':parent' ) cop = each(cop, function(i, e){ temp.push(e.parentNode); });
+          else if( str === ':parent' ){
+            temp = [];
+            each(cop, function(i, e){ temp.push(e.parentNode); });
+            cop = temp;
+          }
           else if( str === ':child' ){
             temp = [];
             each(cop, function(i, e){ temp.push( filter( e.childNodes, function(i, e){ return e.nodeType === 1; }) ); });
