@@ -6,7 +6,7 @@
 
   function dom(sel){
     if(typeof sel !== 'string') return;
-    try{ return unique(document.querySelectorAll(sel)); }
+    try{ return unique(doc.querySelectorAll(sel)); }
     catch(e){
       //将" #nav  > ul.item ,#form   input[value=abc]" 变成 "#nav>ul.item,#form input[value=abc]", 并用","断开
       sel = sel.replace(/^\s+|\s+$/g, '').replace(/\s{2,}/g, ' ').replace(/\s*([:\,>])\s*/g, '$1').split(',');
