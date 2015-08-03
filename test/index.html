@@ -3,11 +3,22 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
-	<script src="../dom.min.js"></script>
+	<script src="../dom.js"></script>
 	<style>
 		body{margin:0; padding:0;}
 		ul{padding:5px 20px;}
 		#main{width:400px; margin:0 auto;}
+		#exeBtn{text-align:center; width:80px;height:40px; line-height:40px; margin:10px auto;  border-radius:5px; border:2px dashed #c00; animation:fade 1.5s infinite linear; -moz-animation:fade 1.5s infinite linear;  }
+		@keyframes fade{
+			0%{ border-color:#c00; }
+			50%{ border-color:#eee; }
+			100%{ border-color:#c00; }
+		}
+		@-moz-keyframes fade{
+			0%{ border-color:#c00; }
+			50%{ border-color:#eee; }
+			100%{ border-color:#c00; }
+		}
 	</style>
 </head>
 <body style="font-family:microsoft yahei; color:#555">
@@ -19,6 +30,7 @@
 					<li><a href="http://www.abc.org">http://www.abc.org</a></li>
 					<li><a href="https://www.baidu.com">https://www.baidu.com</a></li>
 					<li><a href="http://www.hhh.com">http://www.hhh.com</a></li>
+					<li></li>
 				</ul>
 			</li>
 			<li>
@@ -59,11 +71,9 @@
 			  item[i].style.background = 'pink';
 			} 
 		</pre>
-		<div style="text-align:center"><input type="button" value="执行" id="btn"></div>
+		<div id="exeBtn"><input type="button" value="执行" id="btn"></div>
 	</div>
-	<p style="text-align:center">
-		<a target="_blank" href="https://github.com/flfwzgl/dom">fork me on github</a>		
-	</p>
+
 	<script>
 		var btn = document.getElementById('btn');
 		// var item = d('.list:last li:eq(1), input:text:disabled, a[href$=.cn]');
@@ -75,6 +85,12 @@
 			for(var i=0, m=item.length; i<m; i++) item[i].style.background = 'pink';
 		}
 
+
 	</script>
+	
+
+	<a style="width:150px; height:150px; position:fixed; top:0; right:0;" href="https://github.com/flfwzgl/dom">
+		<img src="http://fanlinfeng.xyz/img/fork.png">
+	</a>
 </body>
 </html>
