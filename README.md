@@ -50,7 +50,6 @@ dom选择器是一个超轻量级纯选择器, 兼容到IE5, 用法和document.q
 * ```:checked```
 * ```:disabled```
 * ```:enabled```
-
 * ```:button```		//过滤出type是button的元素, 以下同理
 * ```:checkbox```
 * ```:file```
